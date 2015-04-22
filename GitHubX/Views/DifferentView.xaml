@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<local:DifferentViewBase 
+			 xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 xmlns:local="clr-namespace:GitHubX.Views"
+			 x:Class="GitHubX.Views.DifferentView">
+	 <ContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+            <Label Text="A Different View!" />
+            <Button x:Name="NavigateBack" Text="Go Back" />
+        </StackLayout>
+    </ContentPage.Content>
+</local:DifferentViewBase>
+
+<!--<?xml version="1.0" encoding="UTF-8"?>
+<rxForms:ReactiveContentPage 
+			 xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 x:TypeArguments="vm:DifferentViewModel"
+			 xmlns:rxForms="clr-namespace:ReactiveUI.XamForms;assembly=reactiveui-xamforms"
+			 xmlns:vm="clr-namespace:GitHubX.ViewModels"
+			 x:Class="GitHubX.Views.DifferentView">
+	 <ContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+            <Label Text="A Different View!" />
+            <Button x:Name="NavigateBack" Text="Go Back" />
+        </StackLayout>
+    </ContentPage.Content>
+</rxForms:ReactiveContentPage>-->

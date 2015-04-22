@@ -4,19 +4,47 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using ReactiveUI;
+using Xamarin.Forms;
 
 namespace GitHubX.iOS
 {
 	[Register ("AppDelegate")]
-	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+	public partial class AppDelegate : UIApplicationDelegate
 	{
+		UIWindow window;
+		AutoSuspendHelper suspendHelper;
+
+		public AppDelegate()
+		{
+			RxApp.SuspensionHost.CreateNewAppState = () => new AppBootstrapper();
+		}
+
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-			global::Xamarin.Forms.Forms.Init ();
+			Forms.Init ();
+			RxApp.SuspensionHost.SetupDefaultSuspendResume();
 
-			LoadApplication (new App ());
+			suspendHelper = new AutoSuspendHelper(this);
+			suspendHelper.FinishedLaunching(app, options);
 
-			return base.FinishedLaunching (app, options);
+			window = new UIWindow (UIScreen.MainScreen.Bounds);
+			var vc = RxApp.SuspensionHost.GetAppState<AppBootstrapper>().CreateMainView().CreateViewController();
+
+			window.RootViewController = vc;
+			window.MakeKeyAndVisible ();
+
+			return true;
+		}
+
+		public override void DidEnterBackground(UIApplication application)
+		{
+			suspendHelper.DidEnterBackground(application);
+		}
+
+		public override void OnActivated(UIApplication application)
+		{
+			suspendHelper.OnActivated(application);
 		}
 	}
 }

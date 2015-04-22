@@ -23,12 +23,12 @@ namespace GitHubX
 			};
 		}
 
-		protected override async void OnStart ()
+		protected override void OnStart ()
 		{
 			// Handle when your app starts
 
-			var _client = new Octokit.GitHubClient(new Octokit.ProductHeaderValue("GitHubX"));
-			var _user = await _client.User.Get ("jonghol");
+//			var _client = new Octokit.GitHubClient(new Octokit.ProductHeaderValue("GitHubX"));
+//			var _user = await _client.User.Get ("jonghol");
 		}
 
 		protected override void OnSleep ()
