@@ -8,6 +8,7 @@ using System.Runtime.Serialization;
 using Splat;
 using Octokit;
 using System.Collections.ObjectModel;
+using Xamarin;
 
 namespace GitHubX.ViewModels
 {
@@ -41,7 +42,12 @@ namespace GitHubX.ViewModels
 			HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
 			GitHubClient = Locator.Current.GetService<IGitHubClient> ();
 
+			var handle = Insights.TrackTime("TimeToGetRepos");
+			handle.Start();
+
 			var repos = GitHubClient.Repository.GetAllForUser ("jonghoL").Result;
+			handle.Stop ();
+
 			this.Repositories = new ReactiveList<Repository> (repos);
 		}
 	}

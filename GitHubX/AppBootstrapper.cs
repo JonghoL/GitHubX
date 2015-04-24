@@ -18,13 +18,14 @@ namespace GitHubX
 			Router = new RoutingState();
 
 			Locator.CurrentMutable.RegisterConstant(this, typeof(IScreen));
+			Locator.CurrentMutable.Register (() => new LoginView (), typeof(IViewFor<LoginViewModel>));
 			Locator.CurrentMutable.Register(() => new TestView(), typeof(IViewFor<TestViewModel>));
 			Locator.CurrentMutable.Register(() => new DifferentView(), typeof(IViewFor<DifferentViewModel>));
 
 			Locator.CurrentMutable.RegisterConstant (new Octokit.GitHubClient(new Octokit.ProductHeaderValue("GitHubX")),
 													 typeof(Octokit.IGitHubClient));
 
-			Router.Navigate.Execute(new TestViewModel(this));
+			Router.Navigate.Execute(new LoginViewModel(this));
 			// Router.NavigationStack.Add(new TestViewModel(this));
 		}
 

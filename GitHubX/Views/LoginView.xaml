@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			xmlns:controls="clr-namespace:GitHubX.Controls"
+			x:Class="GitHubX.Views.LoginView">
+	 <ContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+        	<controls:ExtendedEntry x:Name="user" Placeholder="Username or email" PlaceholderTextColor="Red"/>
+        	<controls:ExtendedEntry x:Name="password" Placeholder="Password" IsPassword="true" PlaceholderTextColor="Red"/>
+            <Button x:Name="signIn" Text="Sign in" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
