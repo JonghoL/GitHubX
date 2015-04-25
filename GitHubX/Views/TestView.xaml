@@ -2,22 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 x:Class="GitHubX.Views.TestView">
 	 <ContentPage.Content>
-<!--        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-            <Label Text="Your Guid for today is:" />
-            <Label x:Name="TheGuid" />
-            <Button x:Name="NavigateToDifferentView" Text="Go to a different page" />
-        </StackLayout>-->
         <Grid>
        		 <Grid.ColumnDefinitions>
      	 		<ColumnDefinition Width="*" />
    		 	</Grid.ColumnDefinitions>
-         <ListView x:Name="ListView" >
+         <ListView x:Name="ListView" IsPullToRefreshEnabled="true" >
          	<ListView.ItemTemplate>
         		<DataTemplate>
 		          <ViewCell>
 		            <ViewCell.View>
 		              <StackLayout>
-		                <Label Text="{Binding Name}"  />
+		                <Label Text="{Binding Name}" />
 		              </StackLayout>
 		            </ViewCell.View>
 		          </ViewCell>

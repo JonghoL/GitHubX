@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 using Xamarin.Forms;
 using ReactiveUI;
 using GitHubX.ViewModels;
-using System.Text;
-using System.Diagnostics;
 
 namespace GitHubX.Views
 {
@@ -15,15 +11,10 @@ namespace GitHubX.Views
 		{
 			InitializeComponent ();
 
-			this.BindCommand(ViewModel, x => x.SignIn, x => x.signIn);
+			this.BindCommand(ViewModel, vm => vm.SignIn, v => v.signIn);
 
 			this.Bind (ViewModel, x => x.User, x => x.user.Text);
 			this.Bind (ViewModel, x => x.Password, x => x.password.Text);
-
-//			this.WhenAnyObservable(x => x.ViewModel.SignIn)
-//				.Subscribe(_ => {
-//					Debug.WriteLine("Sign in");
-//				});
 		}
 
 		/// <summary>

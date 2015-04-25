@@ -2,6 +2,7 @@
 using ReactiveUI;
 using Splat;
 using System.Diagnostics;
+using Octokit;
 
 namespace GitHubX.ViewModels
 {
@@ -30,19 +31,24 @@ namespace GitHubX.ViewModels
 		}
 
 		public IScreen HostScreen { get; protected set; }
+		public IGitHubClient GitHubClient { get; protected set; }
 
 		public ReactiveCommand<Object> SignIn { get; protected set; }
 
-		public LoginViewModel() : this(null) {}
-
-		public LoginViewModel(IScreen hostScreen = null)
+		public LoginViewModel(IScreen hostScreen, IGitHubClient gitHubClient)
 		{
 			HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
+		    GitHubClient = gitHubClient ?? Locator.Current.GetService<IGitHubClient> ();
 
 			SignIn = ReactiveCommand.Create();
 
 			this.WhenAnyObservable(x => x.SignIn)
-				.Subscribe(_ => Debug.WriteLine(this.User+":"+this.Password));
+				.Subscribe(_ => { 
+
+					GitHubClient.Connection.Credentials = new Credentials("d2c529462cfb58f29bff2af5ffe96df16c3d387d");
+
+					hostScreen.Router.Navigate.Execute(Resolver.GetService<TestViewModel>());
+				});
 		}
 	}
 }

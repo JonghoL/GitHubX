@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ReactiveUI;
-using System.Runtime.Serialization;
 using Splat;
 using Octokit;
-using System.Collections.ObjectModel;
 using Xamarin;
 
 namespace GitHubX.ViewModels
 {
-	[DataContract]
 	public class TestViewModel : ReactiveObject, IRoutableViewModel
 	{
 		public string UrlPathSegment {
@@ -22,12 +16,6 @@ namespace GitHubX.ViewModels
 		public IScreen HostScreen { get; protected set; }
 		public IGitHubClient GitHubClient { get; protected set; }
 
-		string _TheGuid;
-		[DataMember] public string TheGuid {
-			get { return _TheGuid; }
-			set { this.RaiseAndSetIfChanged(ref _TheGuid, value); }
-		}
-
 		ReactiveList<Repository> _Repositories;
 		public ReactiveList<Repository> Repositories
 		{
@@ -35,19 +23,33 @@ namespace GitHubX.ViewModels
 			set { this.RaiseAndSetIfChanged (ref _Repositories, value); }
 		}
 
-		public TestViewModel(IScreen hostScreen = null)
+		public TestViewModel(IScreen hostScreen, IGitHubClient githubClient)
 		{
-			TheGuid = Guid.NewGuid().ToString();
-
 			HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
-			GitHubClient = Locator.Current.GetService<IGitHubClient> ();
+			GitHubClient = githubClient ?? Locator.Current.GetService<IGitHubClient> ();
 
-			var handle = Insights.TrackTime("TimeToGetRepos");
-			handle.Start();
+			//var repos = GetRepositories ().Result;
+			//this.Repositories = new ReactiveList<Repository> (repos.Where(r => r.FullName.Contains("Git")));
+		}
 
-			var repos = GitHubClient.Repository.GetAllForUser ("jonghoL").Result;
-			handle.Stop ();
+		public async Task<IReadOnlyList<Repository>> GetRepositories()
+		{
+//			var handle = Insights.TrackTime("TimeToGetRepos");
+//			handle.Start();
+//			var repos = await GitHubClient.Repository.GetAllForCurrent ();
+//			handle.Stop ();
 
+//			return repos;
+
+			using (var handle = Insights.TrackTime("TimeToGetRepos")) 
+			{
+				return await GitHubClient.Repository.GetAllForCurrent ();
+			}
+		}
+
+		public async Task OnRefresh()
+		{
+			var repos = await GetRepositories ();
 			this.Repositories = new ReactiveList<Repository> (repos);
 		}
 	}

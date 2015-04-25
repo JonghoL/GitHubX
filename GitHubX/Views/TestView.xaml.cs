@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using Xamarin.Forms;
 using ReactiveUI;
-using System.Reactive.Linq;
 using GitHubX.ViewModels;
 
 namespace GitHubX.Views
@@ -14,13 +12,18 @@ namespace GitHubX.Views
 		{
 			InitializeComponent();
 
-//			this.OneWayBind(ViewModel, x => x.TheGuid, x => x.TheGuid.Text);
-//
-//			this.WhenAnyValue(x => x.ViewModel.HostScreen.Router)
-//				.Select(x => x.NavigateCommandFor<DifferentViewModel>())
-//				.BindTo(this, x => x.NavigateToDifferentView.Command);
-
 			this.OneWayBind (ViewModel, x => x.Repositories, x => x.ListView.ItemsSource);
+
+			//this.Bind (ViewModel, vm => vm.IsRefresing, v => v.ListView.IsRefreshing);
+			this.WhenAnyValue (x => x.ListView.IsRefreshing)
+				.Subscribe (async y => 
+					{
+						if(y)
+						{
+							await ViewModel.OnRefresh();
+							this.ListView.IsRefreshing = !y;
+						}
+				});
 		}
 
 		/// <summary>

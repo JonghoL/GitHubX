@@ -1,7 +1,4 @@
-﻿using System;
-
-using Xamarin.Forms;
-using ReactiveUI;
+﻿using ReactiveUI;
 using Splat;
 
 namespace GitHubX.ViewModels
@@ -14,9 +11,7 @@ namespace GitHubX.ViewModels
 
 		public IScreen HostScreen { get; protected set; }
 
-		public DifferentViewModel() : this(null) {}
-
-		public DifferentViewModel(IScreen hostScreen = null)
+		public DifferentViewModel(IScreen hostScreen)
 		{
 			HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
 		}
