@@ -12,7 +12,7 @@ namespace GitHubX.Views
 		{
 			InitializeComponent();
 
-			this.OneWayBind (ViewModel, x => x.Repositories, x => x.ListView.ItemsSource);
+			this.OneWayBind (ViewModel, vm => vm.Repositories, v => v.ListView.ItemsSource);
 
 			//this.Bind (ViewModel, vm => vm.IsRefresing, v => v.ListView.IsRefreshing);
 			this.WhenAnyValue (x => x.ListView.IsRefreshing)

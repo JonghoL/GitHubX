@@ -2,7 +2,7 @@
 
 namespace GitHubX
 {
-	public interface IServiceConstructor
+	public interface IViewModelConstructor
 	{
 		object Construct(Type type);
 	}

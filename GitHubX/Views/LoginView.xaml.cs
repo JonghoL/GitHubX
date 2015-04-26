@@ -1,5 +1,4 @@
-﻿
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using ReactiveUI;
 using GitHubX.ViewModels;
 
@@ -11,10 +10,10 @@ namespace GitHubX.Views
 		{
 			InitializeComponent ();
 
-			this.BindCommand(ViewModel, vm => vm.SignIn, v => v.signIn);
+			this.Bind (ViewModel, vm => vm.User, v => v.user.Text);
+			this.Bind (ViewModel, vm => vm.Password, v => v.password.Text);
 
-			this.Bind (ViewModel, x => x.User, x => x.user.Text);
-			this.Bind (ViewModel, x => x.Password, x => x.password.Text);
+            this.BindCommand(ViewModel, vm => vm.SignIn, v => v.signIn);
 		}
 
 		/// <summary>

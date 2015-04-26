@@ -35,7 +35,7 @@ namespace GitHubX.ViewModels
 
 		public ReactiveCommand<Object> SignIn { get; protected set; }
 
-		public LoginViewModel(IScreen hostScreen, IGitHubClient gitHubClient)
+		public LoginViewModel(IScreen hostScreen = null, IGitHubClient gitHubClient = null)
 		{
 			HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
 		    GitHubClient = gitHubClient ?? Locator.Current.GetService<IGitHubClient> ();
@@ -47,7 +47,7 @@ namespace GitHubX.ViewModels
 
 					GitHubClient.Connection.Credentials = new Credentials("d2c529462cfb58f29bff2af5ffe96df16c3d387d");
 
-					hostScreen.Router.Navigate.Execute(Resolver.GetService<TestViewModel>());
+					hostScreen.Router.Navigate.Execute(ViewModelConstructor.Current.Construct<TestViewModel>());
 				});
 		}
 	}

@@ -17,7 +17,7 @@ namespace GitHubX
 			Router = new RoutingState();
 
 			Locator.CurrentMutable.RegisterConstant(this, typeof(IScreen));
-			Locator.CurrentMutable.RegisterConstant(new ServiceConstructor(), typeof(IServiceConstructor));
+			Locator.CurrentMutable.RegisterConstant(new DefaultViewModelConstructor(), typeof(IViewModelConstructor));
 
 			Locator.CurrentMutable.RegisterLazySingleton(() => new LoginView (), typeof(IViewFor<LoginViewModel>));
 			Locator.CurrentMutable.RegisterLazySingleton(() => new TestView(), typeof(IViewFor<TestViewModel>));
@@ -26,8 +26,9 @@ namespace GitHubX
 			Locator.CurrentMutable.RegisterLazySingleton (() => new Octokit.GitHubClient(new Octokit.ProductHeaderValue("GitHubX")),
 													 typeof(Octokit.IGitHubClient));
 
+            //Router.Navigate.Execute(new LoginViewModel());
 			//Router.Navigate.Execute(new LoginViewModel(Locator.Current.GetService<IScreen>(), Locator.Current.GetService<Octokit.IGitHubClient>()));
-			Router.Navigate.Execute(Resolver.GetService<LoginViewModel>());
+			Router.Navigate.Execute(ViewModelConstructor.Current.Construct<LoginViewModel>());
 		}
 
 		public Page CreateMainView()
