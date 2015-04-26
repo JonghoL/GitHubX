@@ -45,7 +45,7 @@ namespace GitHubX.ViewModels
 			this.WhenAnyObservable(x => x.SignIn)
 				.Subscribe(_ => { 
 
-					GitHubClient.Connection.Credentials = new Credentials("d2c529462cfb58f29bff2af5ffe96df16c3d387d");
+					GitHubClient.Connection.Credentials = new Credentials("57440bcc2a676ec9f93118cc6b7a1c9e334a9ad3");
 
 					hostScreen.Router.Navigate.Execute(ViewModelConstructor.Current.Construct<TestViewModel>());
 				});

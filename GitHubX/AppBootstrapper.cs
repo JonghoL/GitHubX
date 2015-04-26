@@ -23,7 +23,7 @@ namespace GitHubX
 			Locator.CurrentMutable.RegisterLazySingleton(() => new TestView(), typeof(IViewFor<TestViewModel>));
 			Locator.CurrentMutable.RegisterLazySingleton(() => new DifferentView(), typeof(IViewFor<DifferentViewModel>));
 
-			Locator.CurrentMutable.RegisterLazySingleton (() => new Octokit.GitHubClient(new Octokit.ProductHeaderValue("GitHubX")),
+			Locator.CurrentMutable.RegisterLazySingleton(() => new Octokit.GitHubClient(new Octokit.ProductHeaderValue("GitHubX")),
 													 typeof(Octokit.IGitHubClient));
 
             //Router.Navigate.Execute(new LoginViewModel());
