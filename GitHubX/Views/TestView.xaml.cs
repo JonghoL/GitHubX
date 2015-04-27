@@ -15,15 +15,25 @@ namespace GitHubX.Views
 			this.OneWayBind (ViewModel, vm => vm.Repositories, v => v.ListView.ItemsSource);
 
 			//this.Bind (ViewModel, vm => vm.IsRefresing, v => v.ListView.IsRefreshing);
+
+//			this.WhenAny(x => x.ListView.IsRefreshing, x => x.Value)
+//				.Subscribe (async y => 
+//					{
+//						if(y)
+//						{
+//							await ViewModel.OnRefresh();
+//							this.ListView.IsRefreshing = !y;
+//						}
+//					});
+
 			this.WhenAnyValue (x => x.ListView.IsRefreshing)
 				.Subscribe (async y => 
 					{
-						if(y)
-						{
+						if(y){
 							await ViewModel.OnRefresh();
-							this.ListView.IsRefreshing = !y;
+							this.ListView.IsRefreshing = false;
 						}
-				});
+					});
 		}
 
 		/// <summary>

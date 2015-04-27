@@ -16,18 +16,14 @@ namespace GitHubX.ViewModels
 		public string User
 		{
 			get { return _User; }
-			set {
-				this.RaiseAndSetIfChanged (ref _User, value);
-			}
+			set { this.RaiseAndSetIfChanged (ref _User, value); }
 		}
 
 		string _Password;
 		public string Password
 		{
 			get { return _Password; }
-			set {
-				this.RaiseAndSetIfChanged (ref _Password, value);
-			}
+			set { this.RaiseAndSetIfChanged (ref _Password, value); }
 		}
 
 		public IScreen HostScreen { get; protected set; }
@@ -45,9 +41,9 @@ namespace GitHubX.ViewModels
 			this.WhenAnyObservable(x => x.SignIn)
 				.Subscribe(_ => { 
 
-					GitHubClient.Connection.Credentials = new Credentials("57440bcc2a676ec9f93118cc6b7a1c9e334a9ad3");
+					GitHubClient.Connection.Credentials = new Credentials("");
 
-					hostScreen.Router.Navigate.Execute(ViewModelConstructor.Current.Construct<TestViewModel>());
+					HostScreen.Router.Navigate.Execute(ViewModelConstructor.Current.Construct<TabbedViewModel>());
 				});
 		}
 	}

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms" 
+			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			xmlns:control="clr-namespace:GitHubX.Controls"
+			x:Class="GitHubX.Views.TabbedView">
+			<TabbedPage.Children>
+				<control:XContent x:Name="firstTab" />
+				<control:XContent x:Name="secondTab" />
+
+<!--				<control:XContent ViewModel="{Binding TypeA_VM}"/>
+				<control:XContent ViewModel="{Binding TypeB_VM}"/>-->
+			</TabbedPage.Children>
+</TabbedPage>

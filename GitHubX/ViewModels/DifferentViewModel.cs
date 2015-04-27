@@ -11,7 +11,7 @@ namespace GitHubX.ViewModels
 
 		public IScreen HostScreen { get; protected set; }
 
-		public DifferentViewModel(IScreen hostScreen)
+		public DifferentViewModel(IScreen hostScreen = null)
 		{
 			HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
 		}

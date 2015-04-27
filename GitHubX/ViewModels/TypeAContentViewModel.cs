@@ -1,15 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System;
 using ReactiveUI;
-using Splat;
 using Octokit;
+using Splat;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xamarin;
+using GitHubX.Utils;
 
 namespace GitHubX.ViewModels
 {
-	public class TestViewModel : ReactiveObject, IRoutableViewModel
+	public class TypeAContentViewModel : ReactiveObject, IXViewModel
 	{
-		public string UrlPathSegment {
+		public string Title
+		{
 			get { return "Repos"; }
 		}
 
@@ -30,7 +33,7 @@ namespace GitHubX.ViewModels
 			set { this.RaiseAndSetIfChanged (ref _IsRefreshing, value); }
 		}
 
-		public TestViewModel(IScreen hostScreen = null, IGitHubClient githubClient = null)
+		public TypeAContentViewModel(IScreen hostScreen = null, IGitHubClient githubClient = null)
 		{
 			HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
 			GitHubClient = githubClient ?? Locator.Current.GetService<IGitHubClient> ();
@@ -38,12 +41,12 @@ namespace GitHubX.ViewModels
 
 		public async Task<IReadOnlyList<Repository>> GetRepositories()
 		{
-//			var handle = Insights.TrackTime("TimeToGetRepos");
-//			handle.Start();
-//			var repos = await GitHubClient.Repository.GetAllForCurrent ();
-//			handle.Stop ();
+			//			var handle = Insights.TrackTime("TimeToGetRepos");
+			//			handle.Start();
+			//			var repos = await GitHubClient.Repository.GetAllForCurrent ();
+			//			handle.Stop ();
 
-//			return repos;
+			//			return repos;
 
 			using (var handle = Insights.TrackTime("TimeToGetRepos")) 
 			{
@@ -58,3 +61,4 @@ namespace GitHubX.ViewModels
 		}
 	}
 }
+
